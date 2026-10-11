@@ -1,0 +1,12 @@
+<section class="lv-panel" data-lv="storyboard">
+  <h3>流程故事板 <small>当前步高亮，其余变暗</small></h3>
+  <div class="lv-node" id="n-req"><div class="lv-t">第 1 步 · 请求</div>客户端发起请求</div>
+  <div class="lv-arrow">▼</div>
+  <div class="lv-node" id="n-handle"><div class="lv-t">第 2 步 · 处理</div>服务端处理并更新状态</div>
+  <div class="lv-arrow">▼</div>
+  <div class="lv-node" id="n-resp"><div class="lv-t">第 3 步 · 返回</div>结果返回客户端，状态落定</div>
+</section>
+<section class="lv-panel" data-lv="state-table">
+  <h3>状态表 <small>随步骤实时变化</small></h3>
+  <table class="lv-table"><thead><tr><th>对象</th><th>状态</th><th>计数</th></tr></thead><tbody id="lvState"></tbody></table>
+</section>

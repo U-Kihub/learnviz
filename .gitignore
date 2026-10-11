@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.lv-spec.json
+*.lv-publish.json
+*.lv-artifact.json
+*.lv-browser.json
+*.lv-verify.json

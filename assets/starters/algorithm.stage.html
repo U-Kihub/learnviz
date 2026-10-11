@@ -1,0 +1,17 @@
+<section class="lv-panel" data-lv="input">
+  <h3>输入 <small>改数据后点「执行」重新生成步骤</small></h3>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+    <input id="lvInputArray" placeholder="数组，如 1,3,5,7,9" value="1,3,5,7,9">
+    <input id="lvInputTarget" placeholder="目标" value="7" style="width:72px">
+    <button type="button" id="lvRun">执行</button>
+    <button type="button" id="lvDemo">演示（默认数据）</button>
+  </div>
+</section>
+<section class="lv-panel" data-lv="code">
+  <h3>代码 <small>高亮行 = 当前步骤对应源码</small></h3>
+  <div id="lvCode"></div>
+</section>
+<section class="lv-panel">
+  <h3>数组 <small>lo / hi 夹逼区间，mid 探针</small></h3>
+  <div id="lvMain"></div>
+</section>

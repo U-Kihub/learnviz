@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lv-runtime="1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>@@LEARNVIZ_TITLE@@</title>
+<style>
+/* @@LEARNVIZ_TOKENS@@ */
+
+/* ---- learnviz shell v1 ---- */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--lv-bg); color: var(--lv-txt);
+  font-family: var(--lv-font); font-size: 13.5px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+code, .lv-mono { font-family: var(--lv-mono); }
+code { background: var(--lv-bg); border: 1px solid var(--lv-line); border-radius: 4px; padding: 1px 5px; font-size: 12px; color: var(--lv-acc-2); }
+
+[data-lv="header"] { max-width: var(--lv-page-max); margin: 0 auto; padding: 20px 22px 6px; }
+[data-lv="header"] h1 { font-size: 20px; margin: 0 0 5px; }
+[data-lv="mental-model"] { color: var(--lv-dim); font-size: 13px; margin: 0; }
+[data-lv="mental-model"] b { color: var(--lv-acc); }
+
+[data-lv="controls"] {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  max-width: var(--lv-page-max); margin: 12px auto 0; padding: 10px 22px;
+  background: var(--lv-bg); border-bottom: 1px solid var(--lv-line);
+}
+button, .lv-btn {
+  font-family: inherit; font-size: 12.5px; border-radius: 8px;
+  border: 1px solid var(--lv-line-2); background: var(--lv-panel-2); color: var(--lv-txt);
+  padding: 7px 12px; cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--lv-acc); }
+button:disabled { opacity: .4; cursor: default; }
+button.active { border-color: var(--lv-acc); color: var(--lv-acc); }
+[data-lv="step-label"] { font-family: var(--lv-mono); font-size: 12px; color: var(--lv-dim); min-width: 64px; text-align: center; }
+.lv-speeds { display: flex; gap: 4px; align-items: center; margin-left: auto; font-size: 12px; color: var(--lv-dim-2); }
+.lv-speeds button { padding: 4px 10px; font-size: 11.5px; }
+
+input, select {
+  background: var(--lv-bg); border: 1px solid var(--lv-line-2); color: var(--lv-txt);
+  border-radius: 7px; padding: 6px 9px; font-family: var(--lv-mono); font-size: 13px; outline: none;
+}
+input:focus, select:focus { border-color: var(--lv-acc-2); }
+
+[data-lv="narration"] {
+  max-width: var(--lv-page-max); margin: 12px auto 0; padding: 12px 16px;
+  margin-left: auto; margin-right: auto;
+  border: 1px solid var(--lv-line); border-left: 3px solid var(--lv-acc);
+  border-radius: var(--lv-radius-sm); background: var(--lv-panel);
+  font-size: 14px; min-height: 56px;
+  max-width: calc(var(--lv-page-max) - 44px);
+}
+[data-lv="narration"] b { color: var(--lv-acc); }
+[data-lv="narration"] .lv-warn { color: var(--lv-warn); }
+[data-lv="narration"] .lv-bad { color: var(--lv-bad); }
+
+[data-lv="stage"] {
+  max-width: var(--lv-page-max); margin: 12px auto 0; padding: 0 22px;
+  display: flex; flex-direction: column; gap: var(--lv-gap);
+}
+.lv-panel {
+  background: var(--lv-panel); border: 1px solid var(--lv-line);
+  border-radius: var(--lv-radius); padding: var(--lv-pad) 16px;
+}
+.lv-panel > h3 { font-size: 13.5px; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.lv-panel > h3 small { color: var(--lv-dim-2); font-weight: 400; font-family: var(--lv-mono); font-size: 11px; }
+
+/* storyboard 节点（flow） */
+.lv-node {
+  border: 1px solid var(--lv-line); border-radius: 10px; padding: 10px 12px;
+  background: var(--lv-panel-2); font-size: 12.5px; transition: border-color .2s, background .2s, opacity .2s;
+}
+.lv-node .lv-t { font-size: 11px; color: var(--lv-dim); margin-bottom: 3px; }
+.lv-node.on { border-color: var(--lv-acc); background: #0f2b2a; box-shadow: 0 0 0 1px var(--lv-acc) inset; }
+.lv-node.on .lv-t { color: var(--lv-acc); }
+.lv-node.dim { opacity: .45; }
+.lv-arrow { text-align: center; color: var(--lv-dim-2); font-size: 12px; line-height: 1; }
+
+/* 通用表格（状态表 / 对比表） */
+table.lv-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+table.lv-table th, table.lv-table td { border-bottom: 1px solid var(--lv-line); padding: 5px 8px; text-align: left; }
+table.lv-table th { color: var(--lv-dim); font-weight: 500; font-size: 12px; }
+table.lv-table tr.hl td { background: #123a37; color: var(--lv-acc); }
+table.lv-table tr.dead td { color: var(--lv-dim-2); text-decoration: line-through; }
+table.lv-table td.n { font-variant-numeric: tabular-nums; font-family: var(--lv-mono); }
+
+.lv-badge { font-family: var(--lv-mono); font-size: 11px; padding: 2px 8px; border-radius: 20px; border: 1px solid var(--lv-line-2); color: var(--lv-dim); }
+.lv-badge.ok { color: var(--lv-ok); border-color: var(--lv-ok); }
+.lv-badge.warn { color: var(--lv-warn); border-color: var(--lv-warn); }
+.lv-badge.bad { color: var(--lv-bad); border-color: var(--lv-bad); }
+.lv-badge.acc { color: var(--lv-acc); border-color: var(--lv-acc); }
+
+/* 代码面板（algorithm） */
+.lv-code { font-family: var(--lv-mono); font-size: 12.5px; line-height: 1.7; overflow: auto; }
+.lv-code-line { display: flex; gap: 12px; padding: 0 8px; border-radius: 5px; white-space: pre; }
+.lv-code-line .lv-ln { color: var(--lv-dim-2); width: 2em; text-align: right; flex: none; user-select: none; }
+.lv-code-line.lv-on { background: #123a37; }
+.lv-code-line.lv-on .lv-ln { color: var(--lv-acc); }
+.lv-tk-kw { color: var(--lv-bad); }
+.lv-tk-str { color: var(--lv-p4); }
+.lv-tk-com { color: var(--lv-dim-2); font-style: italic; }
+.lv-tk-num { color: var(--lv-p2); }
+.lv-tk-pre { color: var(--lv-purple); }
+
+[data-lv="legend"] {
+  max-width: calc(var(--lv-page-max) - 44px); margin: 12px auto 0;
+  display: flex; gap: 16px; flex-wrap: wrap;
+  color: var(--lv-dim); font-size: 11.5px;
+}
+[data-lv="legend"] i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+
+[data-lv="notes"] {
+  max-width: var(--lv-page-max); margin: 14px auto 0; padding: 0 22px 48px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--lv-gap);
+}
+[data-lv="notes"] .lv-note h4 { margin: 0 0 8px; font-size: 13.5px; }
+[data-lv="notes"] .lv-note { background: var(--lv-panel); border: 1px solid var(--lv-line); border-radius: var(--lv-radius); padding: 12px 16px; font-size: 13px; }
+[data-lv="notes"] .lv-note p { margin: 0 0 6px; }
+[data-lv="notes"] .lv-note p:last-child { margin-bottom: 0; }
+
+/* @@LEARNVIZ_CONTENT_CSS@@ */
+</style>
+</head>
+<body data-lv-type="@@LEARNVIZ_TYPE@@">
+<header data-lv="header">
+  <h1 data-lv="title">@@LEARNVIZ_TITLE@@</h1>
+  <p data-lv="mental-model">@@LEARNVIZ_MENTAL_MODEL@@</p>
+</header>
+
+<div data-lv="controls">
+  <button type="button" data-lv-action="prev">上一步</button>
+  <button type="button" data-lv-action="play">播放</button>
+  <button type="button" data-lv-action="next">下一步</button>
+  <button type="button" data-lv-action="reset">重置</button>
+  <span data-lv="step-label">-</span>
+  <span class="lv-speeds">速度
+    <button type="button" data-lv-action="speed" data-speed="1200">慢</button>
+    <button type="button" data-lv-action="speed" data-speed="700" class="active">中</button>
+    <button type="button" data-lv-action="speed" data-speed="250">快</button>
+  </span>
+</div>
+
+<div data-lv="narration"></div>
+
+<main data-lv="stage">
+@@LEARNVIZ_STAGE@@
+</main>
+
+<div data-lv="legend">
+  <span><i style="background:var(--lv-acc)"></i>当前步骤</span>
+</div>
+
+<section data-lv="notes">
+@@LEARNVIZ_NOTES@@
+</section>
+
+<script id="viz-meta" type="application/json">
+@@LEARNVIZ_META@@
+</script>
+<script>
+/* @@LEARNVIZ_RUNTIME@@ */
+</script>
+<script>
+/* @@LEARNVIZ_HIGHLIGHTER@@ */
+</script>
+<script>
+/* @@LEARNVIZ_STARTER@@ */
+</script>
+</body>
+</html>

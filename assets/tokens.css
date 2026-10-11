@@ -1,0 +1,32 @@
+/* learnviz-tokens v1 */
+:root {
+  --lv-bg: #0d1117;
+  --lv-panel: #151b23;
+  --lv-panel-2: #1b232d;
+  --lv-line: #28313d;
+  --lv-line-2: #374151;
+  --lv-txt: #dbe3ee;
+  --lv-dim: #8b98a9;
+  --lv-dim-2: #5f6c7d;
+  --lv-acc: #5eead4;
+  --lv-acc-2: #7dd3fc;
+  --lv-ok: #4ade80;
+  --lv-warn: #fbbf24;
+  --lv-bad: #f87171;
+  --lv-purple: #a78bfa;
+  --lv-p1: #f38ba8;
+  --lv-p2: #fab387;
+  --lv-p3: #f9e2af;
+  --lv-p4: #a6e3a1;
+  --lv-p5: #94e2d5;
+  --lv-p6: #89b4fa;
+  --lv-p7: #cba6f7;
+  --lv-p8: #eba0ac;
+  --lv-font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  --lv-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+  --lv-radius: 12px;
+  --lv-radius-sm: 8px;
+  --lv-gap: 13px;
+  --lv-pad: 14px;
+  --lv-page-max: 1320px;
+}

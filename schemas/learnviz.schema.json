@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://learnviz.dev/schemas/learnviz.schema.json",
+  "title": "LearnViz page metadata (viz-meta)",
+  "type": "object",
+  "required": ["specVersion", "type", "title", "slug", "mentalModel", "language", "fidelity"],
+  "additionalProperties": false,
+  "properties": {
+    "specVersion": { "const": 1 },
+    "type": { "enum": ["algorithm", "structure", "flow"] },
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "slug": { "type": "string", "pattern": "^[a-z0-9-]+$", "maxLength": 80 },
+    "mentalModel": { "type": "string", "minLength": 1, "maxLength": 400 },
+    "language": { "type": "string", "default": "zh-CN" },
+    "fidelity": {
+      "type": "object",
+      "required": ["level"],
+      "additionalProperties": false,
+      "properties": {
+        "level": { "enum": ["exact", "simplified", "schematic"] },
+        "notes": { "type": "string", "maxLength": 1000 }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path"],
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "line": { "type": "integer", "minimum": 1 },
+          "label": { "type": "string", "maxLength": 200 },
+          "note": { "type": "string", "maxLength": 400 }
+        }
+      }
+    },
+    "runtimeVersion": { "type": "integer", "const": 1 }
+  }
+}
