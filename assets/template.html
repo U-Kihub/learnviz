@@ -76,7 +76,7 @@ input:focus, select:focus { border-color: var(--lv-acc-2); }
   background: var(--lv-panel-2); font-size: 12.5px; transition: border-color .2s, background .2s, opacity .2s;
 }
 .lv-node .lv-t { font-size: 11px; color: var(--lv-dim); margin-bottom: 3px; }
-.lv-node.on { border-color: var(--lv-acc); background: #0f2b2a; box-shadow: 0 0 0 1px var(--lv-acc) inset; }
+.lv-node.on { border-color: var(--lv-acc); background: var(--lv-on-bg); box-shadow: 0 0 0 1px var(--lv-acc) inset; }
 .lv-node.on .lv-t { color: var(--lv-acc); }
 .lv-node.dim { opacity: .45; }
 .lv-arrow { text-align: center; color: var(--lv-dim-2); font-size: 12px; line-height: 1; }
@@ -85,7 +85,7 @@ input:focus, select:focus { border-color: var(--lv-acc-2); }
 table.lv-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 table.lv-table th, table.lv-table td { border-bottom: 1px solid var(--lv-line); padding: 5px 8px; text-align: left; }
 table.lv-table th { color: var(--lv-dim); font-weight: 500; font-size: 12px; }
-table.lv-table tr.hl td { background: #123a37; color: var(--lv-acc); }
+table.lv-table tr.hl td { background: var(--lv-hl-bg); color: var(--lv-acc); }
 table.lv-table tr.dead td { color: var(--lv-dim-2); text-decoration: line-through; }
 table.lv-table td.n { font-variant-numeric: tabular-nums; font-family: var(--lv-mono); }
 
@@ -99,7 +99,7 @@ table.lv-table td.n { font-variant-numeric: tabular-nums; font-family: var(--lv-
 .lv-code { font-family: var(--lv-mono); font-size: 12.5px; line-height: 1.7; overflow: auto; }
 .lv-code-line { display: flex; gap: 12px; padding: 0 8px; border-radius: 5px; white-space: pre; }
 .lv-code-line .lv-ln { color: var(--lv-dim-2); width: 2em; text-align: right; flex: none; user-select: none; }
-.lv-code-line.lv-on { background: #123a37; }
+.lv-code-line.lv-on { background: var(--lv-hl-bg); }
 .lv-code-line.lv-on .lv-ln { color: var(--lv-acc); }
 .lv-tk-kw { color: var(--lv-bad); }
 .lv-tk-str { color: var(--lv-p4); }
